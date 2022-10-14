@@ -20,7 +20,7 @@ export default async function create(
       title,
       created_at: Date.now(),
       score: 1,
-      ip: 'NA',
+      ip: req.headers['x-forwarded-for'] || 'NA'
     }
 
     await redis.hset('features', id, JSON.stringify(newEntry))
