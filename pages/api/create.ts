@@ -29,7 +29,7 @@ export default async function create(
     })
   } else {
     res.status(400).json({
-      error: 'Max 150 characters please.',
+      error: 'Stop joling around Njabz, too many characters!',
     })
   }
 }
