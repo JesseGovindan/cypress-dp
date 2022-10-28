@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, FormEvent, useEffect, ChangeEvent, useLayoutEffect } from 'react'
 import type { NextApiRequest } from 'next'
 import type { MouseEvent } from 'react'
 import Head from 'next/head'
@@ -182,6 +182,37 @@ export default function Roadmap({
     }
   }
 
+  const [emailValidationMessage, setEmailValidationMessage] = useState('Stop joling around Njabz, you were supposed to type in "njabulo.dlamini@chillisoft.co.za')
+  const [email, setEmail] = useState('')
+
+  useLayoutEffect(() => {
+    if (!subscribeInputRef.current) {
+      return
+    }
+
+    console.log('setting new validation message:', emailValidationMessage) 
+    subscribeInputRef.current.setCustomValidity(emailValidationMessage)
+  }, [subscribeInputRef.current, emailValidationMessage])
+
+  const handleInvalidEmail = (event: FormEvent<HTMLInputElement>): void => {
+    console.log('here')
+    const target = event.target as HTMLInputElement
+    console.log(target.validity)
+    if (target.validity.valueMissing) {
+      setEmailValidationMessage('Stop joling around Njabz, you were supposed to type in "njabulo.dlamini@chillisoft.co.za')
+    } else if (target.validity.typeMismatch) {
+      setEmailValidationMessage('Stop joling around Njabz, you were supposed to type in a proper email address')
+    } else {
+      event.stopPropagation()
+      return
+    }
+  }
+
+  const handleEmailChanged = (newEmail: string): void => {
+    console.log('email changed', newEmail)
+    setEmail(newEmail)
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -249,10 +280,12 @@ export default function Roadmap({
                 type="email"
                 autoComplete="email"
                 maxLength={60}
-                onChange={e => (e.target as HTMLInputElement).setCustomValidity('')}
-                onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Stop joling around Njabz, you were supposed to type in "njabulo.dlamini@chillisoft.co.za')}
-                required
+                value={email}
+                // onChange={e => (e.target as HTMLInputElement).setCustomValidity('')}
+                onChange={e => handleEmailChanged(e.target.value)}
+                onInvalid={e => handleInvalidEmail(e)}
                 className="px-3 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
+                required
               />
               <button
                 id="subscribe"
@@ -311,3 +344,4 @@ export async function getServerSideProps({ req }: { req: NextApiRequest }) {
 
   return { props: { features, ip } }
 }
+
