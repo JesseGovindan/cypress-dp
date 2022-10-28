@@ -1,5 +1,5 @@
-describe('empty spec', () => {
-  it('shows a validation message when request left blank', () => {
+describe('feature description validation', () => {
+  it('shows a validation message when no description given', () => {
     const inputIdentifier = '[aria-label="Suggest a feature for our roadmap"]'
     cy.visit('http://localhost:3000')
     cy.get(inputIdentifier).clear();

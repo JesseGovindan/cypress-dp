@@ -1,5 +1,5 @@
-describe('empty spec', () => {
-  it('passes', () => {
+describe('user can subscribe to email updates', () => {
+  it('notifies user and clears email input', () => {
     cy.visit('http://localhost:3000')
     const inputIdentifier = '[aria-label="Email for updates"]';
     cy.get(inputIdentifier).type('njdlams@gmail.com');

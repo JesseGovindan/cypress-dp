@@ -1,9 +1,9 @@
-describe('empty spec', () => {
+describe('when a request is added', () => {
   beforeEach(() => {
     cy.request('POST', 'http://localhost:3000/api/flush_redis')
   })
 
-  it('passes', () => {
+  it('clears the input adds new feature to feature list', () => {
     cy.visit('http://localhost:3000')
     const inputIdentifier = '[aria-label="Suggest a feature for our roadmap"]'
     const inputField = cy.get(inputIdentifier)
