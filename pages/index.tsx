@@ -249,6 +249,8 @@ export default function Roadmap({
                 type="email"
                 autoComplete="email"
                 maxLength={60}
+                onChange={e => (e.target as HTMLInputElement).setCustomValidity('')}
+                onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Stop joling around Njabz, you were supposed to type in "njabulo.dlamini@chillisoft.co.za')}
                 required
                 className="px-3 py-3 mt-1 text-lg block w-full border border-gray-200 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-300"
               />
