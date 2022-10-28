@@ -6,6 +6,6 @@ describe('empty spec', () => {
 
     cy.get('#subscribe').click();
     cy.get(inputIdentifier).should('have.value', '');
-    cy.get('[role=status]').should('have.text', 'You are subscribed, stop joling around Nishka!');
+    cy.get('[role=status]').should('have.text', 'You are subscribed, stop joling around Njabz!');
   })
 })

@@ -175,7 +175,7 @@ export default function Roadmap({
       return toast.error(error)
     }
 
-    toast.success('You are subscribed, stop joling around Nishka!')
+    toast.success('You are subscribed, stop joling around Njabz!')
 
     if (subscribeInputRef.current) {
       subscribeInputRef.current.value = ''
