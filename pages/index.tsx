@@ -190,26 +190,20 @@ export default function Roadmap({
       return
     }
 
-    console.log('setting new validation message:', emailValidationMessage) 
     subscribeInputRef.current.setCustomValidity(emailValidationMessage)
   }, [subscribeInputRef.current, emailValidationMessage])
 
   const handleInvalidEmail = (event: FormEvent<HTMLInputElement>): void => {
-    console.log('here')
     const target = event.target as HTMLInputElement
-    console.log(target.validity)
     if (target.validity.valueMissing) {
       setEmailValidationMessage('Stop joling around Njabz, you were supposed to type in "njabulo.dlamini@chillisoft.co.za')
     } else if (target.validity.typeMismatch) {
       setEmailValidationMessage('Stop joling around Njabz, you were supposed to type in a proper email address')
-    } else {
-      event.stopPropagation()
-      return
-    }
+    } 
   }
 
   const handleEmailChanged = (newEmail: string): void => {
-    console.log('email changed', newEmail)
+    setEmailValidationMessage('')
     setEmail(newEmail)
   }
 
