@@ -82,7 +82,7 @@ function Item({
   return (
     <div
       className={clsx(
-        'p-6 mx-8 flex items-center border-t border-l border-r',
+        'p-6 mx-8 flex items-center border-t border-l border-r listItem',
         isFirst && 'rounded-t-md',
         isLast && 'border-b rounded-b-md'
       )}
