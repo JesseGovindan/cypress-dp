@@ -9,12 +9,25 @@ describe('given someone else voted for your request', () => {
     cy.get(inputIdentifier).type('this is amazing');
     cy.get('#request-button').click();
 
-    cy.request(
-    {
-      url: 'http://localhost:3000/api/vote',
-      method: 'POST',
-      body: { id: '77a98fe8-bb65-44ec-8f6b-1f818fe02c1d', title: 'this is amazing' },
-      headers: { 'x-forwarded-for': '192.168.0.1' }
-    });
+    cy.request('http://localhost:3000/api/features')
+    .then(response => {
+      console.log(response)
+      return response.body.features
+    })
+    .then(features => {
+      console.log(features)
+      cy.request(
+      {
+        url: 'http://localhost:3000/api/vote',
+        method: 'POST',
+        body: { id: features[0].id, title: features[0].title },
+        headers: { 'x-forwarded-for': '192.168.0.1' }
+      })
+      .then(response => {
+        console.log(response)
+        cy.visit('http://localhost:3000');
+        cy.get('[aria-label="Feature score"]').should('have.text', '2');
+      })
+    })
   })
 })
